@@ -1,4 +1,4 @@
-const DEFAULT_SELECTORS = ["figure", "aside", "nav", "video", "iframe", ".sticky"];
+const DEFAULT_SELECTORS = ["figure", "aside", "nav", "video", "iframe", ".sticky", "header", "footer"];
 
 const DEFAULT_RULES = {
   "www.nownews.com": {
