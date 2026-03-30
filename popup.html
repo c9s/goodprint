@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1>GoodPrint</h1>
+    <p class="subtitle">Remove elements when printing</p>
+  </div>
+
+  <div id="current-site-section">
+    <div class="site-header">
+      <span id="current-hostname" class="hostname"></span>
+      <button id="btn-add-site" class="btn btn-small btn-primary" title="Add rules for this site">+ Add Site</button>
+    </div>
+
+    <div id="current-site-rules" class="rules-section" style="display:none;">
+      <div class="rule-group">
+        <label>Hidden when printing</label>
+        <div id="selector-list" class="tag-list"></div>
+        <div class="input-row">
+          <input type="text" id="selector-input" placeholder="e.g. figure, aside, .sidebar, #ad-banner">
+          <button id="btn-add-selector" class="btn btn-small">Add</button>
+        </div>
+      </div>
+
+      <button id="btn-delete-site" class="btn btn-small btn-danger">Remove All Rules for This Site</button>
+    </div>
+
+    <div id="using-defaults" class="defaults-notice" style="display:none;">
+      Using default selectors
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="defaults-section">
+    <h2>Default Selectors</h2>
+    <p class="subtitle">Applied to sites without custom rules</p>
+    <div id="default-selector-list" class="tag-list"></div>
+    <div class="input-row">
+      <input type="text" id="default-selector-input" placeholder="e.g. figure, aside, nav">
+      <button id="btn-add-default" class="btn btn-small">Add</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div id="all-sites-section">
+    <h2>All Configured Sites</h2>
+    <div id="sites-list"></div>
+  </div>
+
+  <div class="footer">
+    <button id="btn-export" class="btn btn-small">Export</button>
+    <button id="btn-import" class="btn btn-small">Import</button>
+    <input type="file" id="import-file" accept=".json" style="display:none;">
+  </div>
+
+  <script src="defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
