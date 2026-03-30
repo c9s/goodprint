@@ -18,11 +18,20 @@
 
     <div id="current-site-rules" class="rules-section" style="display:none;">
       <div class="rule-group">
-        <label>Hidden when printing</label>
+        <label>Hide when printing</label>
         <div id="selector-list" class="tag-list"></div>
         <div class="input-row">
           <input type="text" id="selector-input" placeholder="e.g. figure, aside, .sidebar, #ad-banner">
           <button id="btn-add-selector" class="btn btn-small">Add</button>
+        </div>
+      </div>
+
+      <div class="rule-group">
+        <label>Remove from page</label>
+        <div id="remove-list" class="tag-list"></div>
+        <div class="input-row">
+          <input type="text" id="remove-input" placeholder="e.g. .ad-banner, #popup">
+          <button id="btn-add-remove" class="btn btn-small">Add</button>
         </div>
       </div>
 

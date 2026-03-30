@@ -19,7 +19,7 @@
       chrome.storage.sync.get(["rules", "defaultSelectors"], (result) => {
         const rules = result.rules || {};
         const fallback = result.defaultSelectors || DEFAULT_SELECTORS;
-        siteRules = rules[hostname] || { selectors: fallback };
+        siteRules = rules[hostname] || { selectors: fallback, remove: [] };
         resolve(siteRules);
       });
     });
@@ -46,23 +46,40 @@
     }
   }
 
+  // Remove elements from DOM permanently
+  function removeElements() {
+    if (!siteRules) return;
+    const selectors = siteRules.remove || [];
+    for (const selector of selectors) {
+      const els = document.querySelectorAll(selector);
+      for (const el of els) {
+        console.log("[GoodPrint] removing:", selector, el);
+        el.remove();
+      }
+    }
+  }
+
   function applyRules() {
     clearHideClass();
     applyHideClass();
+    removeElements();
   }
 
   // Listen for rule changes from popup
   chrome.storage.onChanged.addListener((changes) => {
     if (changes.rules) {
       const newRules = changes.rules.newValue || {};
-      const fallback = { selectors: DEFAULT_SELECTORS };
+      const fallback = { selectors: DEFAULT_SELECTORS, remove: [] };
       siteRules = newRules[hostname] || fallback;
       applyRules();
     }
   });
 
   // Re-apply before print to catch dynamically added elements
-  window.addEventListener("beforeprint", applyHideClass);
+  window.addEventListener("beforeprint", () => {
+    applyHideClass();
+    removeElements();
+  });
 
   // Initialize
   injectStyleRule();

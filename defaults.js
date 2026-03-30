@@ -34,5 +34,11 @@ const DEFAULT_RULES = {
       ".fb-quote",
       ".story > p > img"
     ]
+  },
+  "udn.com": {
+    selectors: [
+      "figure",
+      "aside", "div.udn-ads", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header"
+    ]
   }
 };

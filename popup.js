@@ -98,7 +98,8 @@
       addBtn.style.display = "none";
       rulesSection.style.display = "block";
       usingDefaults.style.display = "none";
-      renderTagList("selector-list", rules.selectors || [], removeSelector);
+      renderTagList("selector-list", rules.selectors || [], (sel) => removeSiteSelector("selectors", sel));
+      renderTagList("remove-list", rules.remove || [], (sel) => removeSiteSelector("remove", sel));
     } else {
       addBtn.style.display = "inline-block";
       rulesSection.style.display = "none";
@@ -122,7 +123,8 @@
 
     for (const host of hostnames) {
       const rules = allRules[host];
-      const count = (rules.selectors || []).length;
+      const hideCount = (rules.selectors || []).length;
+      const removeCount = (rules.remove || []).length;
 
       const item = document.createElement("div");
       item.className = "site-item";
@@ -133,7 +135,10 @@
 
       const info = document.createElement("span");
       info.className = "site-count";
-      info.textContent = `${count} selector${count !== 1 ? "s" : ""}`;
+      const parts = [];
+      if (hideCount > 0) parts.push(`${hideCount} hide`);
+      if (removeCount > 0) parts.push(`${removeCount} remove`);
+      info.textContent = parts.length > 0 ? parts.join(", ") : "no selectors";
 
       item.appendChild(name);
       item.appendChild(info);
@@ -149,21 +154,23 @@
 
   // --- Actions ---
 
-  function addSelector(selector) {
+  function addSiteSelector(type, selector) {
     if (!selector || !currentHostname) return;
     if (!allRules[currentHostname]) {
-      allRules[currentHostname] = { selectors: [] };
+      allRules[currentHostname] = { selectors: [], remove: [] };
     }
-    const list = allRules[currentHostname].selectors;
-    if (!list.includes(selector)) {
-      list.push(selector);
+    const rule = allRules[currentHostname];
+    if (!rule[type]) rule[type] = [];
+    if (!rule[type].includes(selector)) {
+      rule[type].push(selector);
       saveRules().then(renderAll);
     }
   }
 
-  function removeSelector(selector) {
+  function removeSiteSelector(type, selector) {
     if (!allRules[currentHostname]) return;
-    const list = allRules[currentHostname].selectors;
+    const list = allRules[currentHostname][type];
+    if (!list) return;
     const idx = list.indexOf(selector);
     if (idx !== -1) {
       list.splice(idx, 1);
@@ -189,7 +196,7 @@
 
   function addCurrentSite() {
     if (!currentHostname) return;
-    allRules[currentHostname] = { selectors: [] };
+    allRules[currentHostname] = { selectors: [], remove: [] };
     saveRules().then(renderAll);
   }
 
@@ -219,7 +226,8 @@
           if (imported.rules) {
             for (const [host, rules] of Object.entries(imported.rules)) {
               allRules[host] = {
-                selectors: Array.isArray(rules.selectors) ? rules.selectors : []
+                selectors: Array.isArray(rules.selectors) ? rules.selectors : [],
+                remove: Array.isArray(rules.remove) ? rules.remove : []
               };
             }
           }
@@ -243,14 +251,28 @@
 
     $("btn-add-selector").addEventListener("click", () => {
       const input = $("selector-input");
-      addSelector(input.value.trim());
+      addSiteSelector("selectors", input.value.trim());
       input.value = "";
     });
 
     $("selector-input").addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         const input = $("selector-input");
-        addSelector(input.value.trim());
+        addSiteSelector("selectors", input.value.trim());
+        input.value = "";
+      }
+    });
+
+    $("btn-add-remove").addEventListener("click", () => {
+      const input = $("remove-input");
+      addSiteSelector("remove", input.value.trim());
+      input.value = "";
+    });
+
+    $("remove-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const input = $("remove-input");
+        addSiteSelector("remove", input.value.trim());
         input.value = "";
       }
     });
