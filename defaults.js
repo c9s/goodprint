@@ -40,5 +40,10 @@ const DEFAULT_RULES = {
       "figure",
       "aside", "div.udn-ads", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header"
     ]
+  },
+  "x.com": {
+    selectors: [
+        "header[role=banner]", '[data-testid="sidebarColumn"]'
+    ]
   }
 };
