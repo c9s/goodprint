@@ -45,5 +45,9 @@ const DEFAULT_RULES = {
     selectors: [
         "header[role=banner]", '[data-testid="sidebarColumn"]'
     ]
+  },
+  "storm.mg": {
+    selectors: [ "header", "footer", "figure", ".coverImg"],
+    remove: [".adGeneral"]
   }
 };
