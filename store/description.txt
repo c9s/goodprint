@@ -1,0 +1,40 @@
+GoodPrint removes images, ads, sidebars, and other non-essential elements when you print web pages — saving ink and giving you cleaner printouts.
+
+🖨️ HOW IT WORKS
+
+GoodPrint uses CSS rules to hide unwanted elements in print preview. Your page looks normal on screen, but prints without the clutter. You can also choose to permanently remove elements from the page for an even cleaner result.
+
+✅ FEATURES
+
+• Per-site rules — define exactly which elements to hide or remove on each website
+• Default selectors — a fallback set (figure, aside, nav, video, iframe) applied to all sites without custom rules
+• Two modes: "Hide" (CSS-based, print only) and "Remove" (strips elements from the page)
+• Pre-configured rules for popular news sites (nownews.com, Yahoo News TW, ETtoday, UDN)
+• Import/Export — back up your rules or share them with others
+• No data collection — all rules are stored locally in your browser
+
+🎯 PERFECT FOR
+
+• Printing news articles without ads, images, and sidebars
+• Saving ink and toner by removing unnecessary graphics
+• Getting clean, readable printouts from cluttered web pages
+• Printing recipes, documentation, or reference material without distractions
+
+⚙️ HOW TO USE
+
+1. Navigate to any web page
+2. Click the GoodPrint icon to view or edit rules
+3. Add CSS selectors for elements you want hidden or removed
+4. Press Ctrl+P (Cmd+P on Mac) — hidden elements won't appear in print preview
+
+💡 SELECTOR EXAMPLES
+
+• figure — images with captions
+• aside — sidebars
+• nav — navigation bars
+• .ad-banner — elements with class "ad-banner"
+• #sidebar — element with id "sidebar"
+
+🔒 PRIVACY
+
+GoodPrint collects no data. All rules are stored locally using Chrome's sync storage. No analytics, no tracking, no remote servers.
