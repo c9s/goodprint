@@ -1,5 +1,24 @@
 const DEFAULT_SELECTORS = ["figure", "aside", "nav", "video", "iframe", ".sticky", "header", "footer"];
 
+const DEFAULT_STYLES = {
+  "body": {
+    "font-family": "Georgia, 'Times New Roman', serif",
+    "font-size": "12pt",
+    "line-height": "1.5",
+    "color": "#000",
+    "background": "#fff"
+  },
+  "a": {
+    "color": "#000",
+    "text-decoration": "underline"
+  },
+  "*": {
+    "background": "transparent !important",
+    "box-shadow": "none !important",
+    "text-shadow": "none !important"
+  }
+};
+
 const DEFAULT_RULES = {
   "www.nownews.com": {
     selectors: ["div#header", "figure.image", "aside.rightCol", "div.ad-head", "div.adBlk", "div.more-news", "div.ad-blk1"]

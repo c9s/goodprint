@@ -19,6 +19,6 @@ chrome.runtime.onInstalled.addListener(() => {
       }
     }
 
-    chrome.storage.sync.set({ rules: merged, defaultSelectors: DEFAULT_SELECTORS });
+    chrome.storage.sync.set({ rules: merged, defaultSelectors: DEFAULT_SELECTORS, defaultStyles: DEFAULT_STYLES });
   });
 });

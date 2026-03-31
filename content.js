@@ -4,21 +4,46 @@
   const HIDE_CLASS = "goodprint-hide";
   const hostname = location.hostname;
   let siteRules = null;
+  let defaultStyles = DEFAULT_STYLES;
 
-  // Inject a single static style rule once
+  // Build CSS string from a styles object { "selector": { "prop": "value" } }
+  function buildStylesCSS(styles) {
+    if (!styles || typeof styles !== "object") return "";
+    return Object.entries(styles)
+      .map(([selector, props]) => {
+        const declarations = Object.entries(props)
+          .map(([prop, val]) => `    ${prop}: ${val};`)
+          .join("\n");
+        return `  ${selector} {\n${declarations}\n  }`;
+      })
+      .join("\n");
+  }
+
+  // Inject print styles (hide class + default styles + per-site styles)
   function injectStyleRule() {
     const styleEl = document.createElement("style");
     styleEl.id = "goodprint-style";
+
+    const defaultCSS = buildStylesCSS(defaultStyles);
+    const siteCSS = buildStylesCSS(siteRules && siteRules.styles);
+
     styleEl.textContent =
-      `@media print { .${HIDE_CLASS} { display: none !important; } }`;
+      `@media print {\n  .${HIDE_CLASS} { display: none !important; }\n${defaultCSS}\n${siteCSS}\n}`;
     document.head.appendChild(styleEl);
+  }
+
+  function updateStyleRule() {
+    const existing = document.getElementById("goodprint-style");
+    if (existing) existing.remove();
+    injectStyleRule();
   }
 
   function loadRules() {
     return new Promise((resolve) => {
-      chrome.storage.sync.get(["rules", "defaultSelectors"], (result) => {
+      chrome.storage.sync.get(["rules", "defaultSelectors", "defaultStyles"], (result) => {
         const rules = result.rules || {};
         const fallback = result.defaultSelectors || DEFAULT_SELECTORS;
+        defaultStyles = result.defaultStyles || DEFAULT_STYLES;
         siteRules = rules[hostname] || { selectors: fallback, remove: [] };
         resolve(siteRules);
       });
@@ -63,6 +88,7 @@
     clearHideClass();
     applyHideClass();
     removeElements();
+    updateStyleRule();
   }
 
   // Listen for rule changes from popup
@@ -82,6 +108,5 @@
   });
 
   // Initialize
-  injectStyleRule();
   loadRules().then(applyRules);
 })();
