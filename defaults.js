@@ -57,9 +57,9 @@ const DEFAULT_RULES = {
   "udn.com": {
     selectors: [
       "figure",
-      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins"
+      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins", ".footer", ".aside-btn-wrapper"
     ],
-    remove: [".inline-ads", "div.udn-ads", ".udn-idle"]
+    remove: [".inline-ads", "div.udn-ads", ".udn-idle", ".coverstoryad", ".edn-ads--inlineAds", ".coverad"]
   },
   "www.chinatimes.com": {
     selectors: [
