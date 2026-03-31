@@ -3,8 +3,8 @@ const DEFAULT_SELECTORS = ["figure", "aside", "nav", "video", "iframe", ".sticky
 const DEFAULT_STYLES = {
   "body": {
     "font-family": "Georgia, 'Times New Roman', serif",
-    "font-size": "12pt",
-    "line-height": "1.5",
+    "font-size": "15px",
+    "line-height": "1.2",
     "color": "#000",
     "background": "#fff"
   },
@@ -57,8 +57,9 @@ const DEFAULT_RULES = {
   "udn.com": {
     selectors: [
       "figure",
-      "aside", "div.udn-ads", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header"
-    ]
+      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins"
+    ],
+    remove: [".inline-ads", "div.udn-ads"]
   },
   "x.com": {
     selectors: [
