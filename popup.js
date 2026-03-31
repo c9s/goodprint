@@ -206,6 +206,15 @@
     saveRules().then(renderAll);
   }
 
+  function resetToDefaults() {
+    if (!confirm("Reset all rules and default selectors to their original defaults? This will overwrite your customizations.")) {
+      return;
+    }
+    allRules = JSON.parse(JSON.stringify(DEFAULT_RULES));
+    defaultSelectors = [...DEFAULT_SELECTORS];
+    Promise.all([saveRules(), saveDefaultSelectors()]).then(renderAll);
+  }
+
   function exportRules() {
     const data = { rules: allRules, defaultSelectors };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -293,6 +302,7 @@
 
     $("btn-export").addEventListener("click", exportRules);
     $("btn-import").addEventListener("click", () => $("import-file").click());
+    $("btn-reset").addEventListener("click", resetToDefaults);
     $("import-file").addEventListener("change", (e) => {
       if (e.target.files[0]) {
         importRules(e.target.files[0]);

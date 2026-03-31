@@ -24,7 +24,8 @@ const DEFAULT_RULES = {
     selectors: ["div#header", "figure.image", "aside.rightCol", "div.ad-head", "div.adBlk", "div.more-news", "div.ad-blk1"]
   },
   "tw.news.yahoo.com": {
-    selectors: [".sticky", "figure", "aside", "video", "iframe"]
+    selectors: [".sticky", "figure", "aside", "video", "iframe", ".fixed.w-screen", "nav", ".bg-toast-background"],
+    remove: ["#cto_banner_content", "#sda-top-right-iframe"]
   },
   "www.ettoday.net": {
     selectors: [
