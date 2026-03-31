@@ -59,7 +59,14 @@ const DEFAULT_RULES = {
       "figure",
       "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins"
     ],
-    remove: [".inline-ads", "div.udn-ads"]
+    remove: [".inline-ads", "div.udn-ads", ".udn-idle"]
+  },
+  "www.chinatimes.com": {
+    selectors: [
+      "figure",
+      "aside", "footer", ".social-share", "#recommended-article"
+    ],
+    remove: [".ad"]
   },
   "x.com": {
     selectors: [
