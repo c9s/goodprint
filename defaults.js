@@ -74,8 +74,12 @@ const DEFAULT_RULES = {
         "header[role=banner]", '[data-testid="sidebarColumn"]'
     ]
   },
-  "storm.mg": {
+  "www.storm.mg": {
     selectors: [ "header", "footer", "figure", ".coverImg"],
     remove: [".adGeneral"]
+  },
+  "www.coindesk.com": {
+    selectors: ["figure", "aside", "nav", "video", "iframe", ".sticky", "header", "footer", ".jwplayer"],
+    remove: [".article-ad", ".ad-container"]
   }
 };
