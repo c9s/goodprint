@@ -58,7 +58,16 @@ const DEFAULT_RULES = {
   "udn.com": {
     selectors: [
       "figure",
-      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins", ".footer", ".aside-btn-wrapper"
+      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins", ".footer", ".aside-btn-wrapper",
+      ".article-body__social-bar"
+    ],
+    remove: [".inline-ads", "div.udn-ads", ".udn-idle", ".coverstoryad", ".edn-ads--inlineAds", ".coverad"]
+  },
+  "money.udn.com": {
+    selectors: [
+      "figure",
+      "aside", "footer", "#gotop", ".udn-idle", ".udn-overlay", "header", ".article-content__plugins", ".footer", ".aside-btn-wrapper",
+      ".article-body__social-bar"
     ],
     remove: [".inline-ads", "div.udn-ads", ".udn-idle", ".coverstoryad", ".edn-ads--inlineAds", ".coverad"]
   },
